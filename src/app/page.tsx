@@ -1,16 +1,15 @@
-import { fetchPrefectures } from "./_functions/function";
+import PrefectureCheckbox from "@/features/prefectureCheckbox";
 import styles from "./page.module.css";
+import PopulationChart from "@/features/populationChart";
+import { fetchPrefectures } from "@/libs";
 
 export default async function Home() {
   const prefectures = await fetchPrefectures();
 
   return (
     <div className={styles.container}>
-      <div>
-        {prefectures.map((prefecture) => (
-          <div key={prefecture.prefCode}>{prefecture.prefName}</div>
-        ))}
-      </div>
+      <PrefectureCheckbox prefectures={prefectures} />
+      <PopulationChart prefectures={prefectures} />
     </div>
   );
 }
