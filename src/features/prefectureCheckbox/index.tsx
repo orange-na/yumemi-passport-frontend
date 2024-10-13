@@ -13,7 +13,7 @@ export default function PrefectureCheckbox({ prefectures }: Props) {
     useSelectedPrefecturesStore();
 
   return (
-    <>
+    <div className={styles.container}>
       {prefectures.map((prefecture) => (
         <div key={prefecture.prefCode}>
           <input
@@ -32,6 +32,6 @@ export default function PrefectureCheckbox({ prefectures }: Props) {
           </label>
         </div>
       ))}
-    </>
+    </div>
   );
 }
