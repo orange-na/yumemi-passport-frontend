@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "biome lint -- apply ./src",
+    "format": "biome format ./src --write",
+    "check": "biome check --apply ./src",
     "test:e2e": "playwright test"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.3",
     "@playwright/test": "^1.48.0",
     "@types/node": "^20",
     "@types/react": "^18",
