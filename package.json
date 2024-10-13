@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && biome lint",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
+    "format": "biome format",
+    "format:fix": "biome format --write",
     "test:e2e": "playwright test"
   },
   "dependencies": {
@@ -19,6 +22,7 @@
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.3",
     "@playwright/test": "^1.48.0",
     "@types/node": "^20",
     "@types/react": "^18",
