@@ -1,10 +1,11 @@
 "use client";
 
 import { Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
-import { Prefecture } from "@/types";
+import { PopulationLabel, Prefecture } from "@/types";
 import { useEffect, useState } from "react";
 import { env } from "@/env/env";
 import { useSelectedPrefecturesStore } from "@/stores/selectedPrefectures";
+import { populationLabels } from "@/constants";
 
 type Props = {
   prefectures: Prefecture[];
@@ -18,6 +19,8 @@ type PopulationData = {
 export default function PopulationChart({ prefectures }: Props) {
   const { selectedPrefectures } = useSelectedPrefecturesStore();
   const [data, setData] = useState<PopulationData[]>([]);
+  const [selectedPopulationLabel, setSelectedPopulationLabel] =
+    useState<PopulationLabel>("総人口");
 
   useEffect(() => {
     const fetchPopulationData = async () => {
@@ -33,45 +36,62 @@ export default function PopulationChart({ prefectures }: Props) {
           (p) => p.prefCode === prefCode
         )?.prefName;
 
-        prefectureData.forEach((item: { year: number; value: number }) => {
-          const existingItem = newData.find((d) => d.year === item.year);
-          if (existingItem) {
-            existingItem[prefName!] = item.value;
-          } else {
-            newData.push({ year: item.year, [prefName!]: item.value });
-          }
-        });
+        prefectureData
+          .find(({ label }) => label === selectedPopulationLabel)
+          ?.data.forEach((item: { year: number; value: number }) => {
+            const existingItem = newData.find((d) => d.year === item.year);
+            if (existingItem) {
+              existingItem[prefName!] = item.value;
+            } else {
+              newData.push({ year: item.year, [prefName!]: item.value });
+            }
+          });
       });
 
       setData(newData);
     };
 
     fetchPopulationData();
-  }, [selectedPrefectures, prefectures]);
+  }, [selectedPrefectures, prefectures, selectedPopulationLabel]);
 
   return (
-    <LineChart width={800} height={500} data={data}>
-      <XAxis dataKey="year" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      {Object.keys(data[0] || {})
-        .filter((key) => key !== "year")
-        .map((prefName) => (
-          <Line
-            key={prefName}
-            type="monotone"
-            dataKey={prefName}
-            stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
-          />
+    <>
+      <div>
+        {populationLabels.map((populationLabel) => (
+          <label key={populationLabel}>
+            <input
+              type="radio"
+              value={populationLabel}
+              checked={selectedPopulationLabel === populationLabel}
+              onChange={() => setSelectedPopulationLabel(populationLabel)}
+            />
+            {populationLabel}
+          </label>
         ))}
-    </LineChart>
+      </div>
+      <LineChart width={800} height={500} data={data}>
+        <XAxis dataKey="year" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        {Object.keys(data[0] || {})
+          .filter((key) => key !== "year")
+          .map((prefName) => (
+            <Line
+              key={prefName}
+              type="monotone"
+              dataKey={prefName}
+              stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
+            />
+          ))}
+      </LineChart>
+    </>
   );
 }
 
 async function fetchPopulation(
   prefCode: number
-): Promise<{ year: number; value: number }[]> {
+): Promise<{ label: string; data: { year: number; value: number }[] }[]> {
   const response = await fetch(
     `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefCode}`,
     {
@@ -81,5 +101,5 @@ async function fetchPopulation(
     }
   );
   const data = await response.json();
-  return data.result.data[0].data;
+  return data.result.data;
 }
