@@ -6,11 +6,16 @@
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false,
-    "ignore": []
+    "ignoreUnknown": true
   },
   "formatter": {
     "enabled": true,
+    "include": [
+      "./src/**/*.ts",
+      "./src/**/*.tsx",
+      "./src/**/*.js",
+      "./src/**/*.jsx"
+    ],
     "indentStyle": "space"
   },
   "organizeImports": {
@@ -18,8 +23,22 @@
   },
   "linter": {
     "enabled": true,
+    "include": [
+      "./src/**/*.ts",
+      "./src/**/*.tsx",
+      "./src/**/*.js",
+      "./src/**/*.jsx"
+    ],
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style": {
+        "useImportType": "off",
+        "noUselessElse": "off",
+        "noNonNullAssertion": "off"
+      },
+      "complexity": {
+        "noForEach": "off"
+      }
     }
   },
   "javascript": {

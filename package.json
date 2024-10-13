@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && biome lint",
     "build": "next build",
     "start": "next start",
-    "lint": "biome lint -- apply ./src",
-    "format": "biome format ./src --write",
-    "check": "biome check --apply ./src",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --write",
+    "format": "biome format",
+    "format:fix": "biome format --write",
     "test:e2e": "playwright test"
   },
   "dependencies": {
