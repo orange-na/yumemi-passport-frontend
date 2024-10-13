@@ -1,11 +1,20 @@
 "use client";
 
-import { Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { PopulationLabel, Prefecture } from "@/types";
 import { useEffect, useState } from "react";
 import { env } from "@/env/env";
 import { useSelectedPrefecturesStore } from "@/stores/selectedPrefectures";
 import { populationLabels } from "@/constants";
+import styles from "./index.module.css";
 
 type Props = {
   prefectures: Prefecture[];
@@ -56,9 +65,9 @@ export default function PopulationChart({ prefectures }: Props) {
 
   return (
     <>
-      <div>
+      <div className={styles.populationLabels}>
         {populationLabels.map((populationLabel) => (
-          <label key={populationLabel}>
+          <label key={populationLabel} className={styles.populationLabel}>
             <input
               type="radio"
               value={populationLabel}
@@ -69,22 +78,47 @@ export default function PopulationChart({ prefectures }: Props) {
           </label>
         ))}
       </div>
-      <LineChart width={800} height={500} data={data}>
-        <XAxis dataKey="year" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        {Object.keys(data[0] || {})
-          .filter((key) => key !== "year")
-          .map((prefName) => (
-            <Line
-              key={prefName}
-              type="monotone"
-              dataKey={prefName}
-              stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
-            />
-          ))}
-      </LineChart>
+      <ResponsiveContainer width="100%" height={500}>
+        <LineChart data={data} className={styles.lineChart}>
+          <XAxis
+            dataKey="year"
+            height={50}
+            padding={{
+              left: 20,
+              right: 20,
+            }}
+            label={{
+              value: "西暦(年度)",
+              position: "insideBottomRight",
+              offset: 0,
+            }}
+          />
+          <YAxis
+            tickFormatter={(value) => `${value / 10000}`}
+            label={{
+              value: "人口(万人)",
+              angle: -90,
+              position: "insideLeft",
+            }}
+          />
+          <Tooltip />
+          <Legend />
+          {Object.keys(data[0] || {})
+            .filter((key) => key !== "year")
+            .map((prefName, index) => {
+              const hue = (index * 137.5) % 360;
+              const color = `hsl(${hue}, 100%, 65%)`;
+              return (
+                <Line
+                  key={prefName}
+                  type="monotone"
+                  dataKey={prefName}
+                  stroke={color}
+                />
+              );
+            })}
+        </LineChart>
+      </ResponsiveContainer>
     </>
   );
 }

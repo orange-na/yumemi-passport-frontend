@@ -1,0 +1,10 @@
+.lineChart {
+  background-color: #00000080;
+  border-radius: 8px;
+}
+
+.populationLabel {
+  font-size: 14px;
+  margin-left: 4px;
+  cursor: pointer;
+}
