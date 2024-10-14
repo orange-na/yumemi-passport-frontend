@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import styles from "./error.module.css";
-import Link from "next/link";
+import LinkButton from "@/components/linkButton";
 
 export default function Error({
   error,
@@ -19,9 +19,9 @@ export default function Error({
       <p>
         一時的なエラーが発生しました。時間をおいて再度アクセスしてください。
       </p>
-      <Link href="/" className={styles.link}>
+      <LinkButton href="/" variant="primary" marginTop={50}>
         トップページへ戻る
-      </Link>
+      </LinkButton>
     </main>
   );
 }

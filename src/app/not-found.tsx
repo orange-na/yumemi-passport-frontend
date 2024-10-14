@@ -1,5 +1,5 @@
-import Link from "next/link";
 import styles from "./not-found.module.css";
+import LinkButton from "@/components/linkButton";
 
 export default function NotFound() {
   return (
@@ -8,9 +8,9 @@ export default function NotFound() {
       <p>
         お探しのページが見つかりませんでした。URLをご確認の上、再度アクセスしてください。
       </p>
-      <Link href="/" className={styles.link}>
+      <LinkButton href="/" variant="primary" marginTop={50}>
         トップページへ戻る
-      </Link>
+      </LinkButton>
     </main>
   );
 }
