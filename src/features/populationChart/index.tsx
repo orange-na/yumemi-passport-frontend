@@ -30,19 +30,6 @@ export default function PopulationChart({ prefectures }: Props) {
   const [selectedPopulationLabel, setSelectedPopulationLabel] =
     useState<PopulationLabel>("総人口");
 
-  async function fetchPopulation(
-    prefCode: number
-  ): Promise<{ label: string; data: { year: number; value: number }[] }[]> {
-    try {
-      const res = await fetch(`/api/prefectures/${prefCode}/population`);
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.error(error);
-      throw new Error("Failed to fetch population data");
-    }
-  }
-
   useEffect(() => {
     const fetchPopulationData = async () => {
       const promises = selectedPrefectures.map((prefCode) =>
@@ -133,4 +120,17 @@ export default function PopulationChart({ prefectures }: Props) {
       </ResponsiveContainer>
     </>
   );
+}
+
+async function fetchPopulation(
+  prefCode: number
+): Promise<{ label: string; data: { year: number; value: number }[] }[]> {
+  try {
+    const res = await fetch(`/api/prefectures/${prefCode}/population`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch population data");
+  }
 }
