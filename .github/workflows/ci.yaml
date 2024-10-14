@@ -15,8 +15,10 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Copy environment variables
-        run: cp ./.env.sample ./.env
+      - name: Create .env file
+        run: |
+          touch .env
+          echo "RESAS_API_KEY=${{ secrets.RESAS_API_KEY }}" >> .env
 
       - name: Install dependencies
         run: npm install
