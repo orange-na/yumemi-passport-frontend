@@ -11,7 +11,6 @@ import {
 } from "recharts";
 import { PopulationLabel, Prefecture } from "@/types";
 import { useEffect, useState } from "react";
-import { env } from "@/env/env";
 import { useSelectedPrefecturesStore } from "@/stores/selectedPrefectures";
 import { populationLabels } from "@/constants";
 import styles from "./index.module.css";
@@ -126,14 +125,12 @@ export default function PopulationChart({ prefectures }: Props) {
 async function fetchPopulation(
   prefCode: number
 ): Promise<{ label: string; data: { year: number; value: number }[] }[]> {
-  const response = await fetch(
-    `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefCode}`,
-    {
-      headers: {
-        "X-API-KEY": env.NEXT_PUBLIC_RESAS_API_KEY,
-      },
-    }
-  );
-  const data = await response.json();
-  return data.result.data;
+  try {
+    const res = await fetch(`/api/prefectures/${prefCode}/population`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch population data");
+  }
 }
