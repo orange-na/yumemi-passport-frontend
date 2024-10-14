@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  gap: 8px;
+  margin: 200px auto;
+}
+
+.heading {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.link {
+  margin-top: 16px;
+  background-color: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.link:hover {
+  background-color: #60a5fa;
+}
