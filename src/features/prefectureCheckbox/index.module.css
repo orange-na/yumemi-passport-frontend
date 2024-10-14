@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  gap: 10px;
+  gap: 4px;
 }
 
 .region {
@@ -21,8 +21,9 @@
   font-size: 16px;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
   margin-left: 20px;
+  margin-left: 0;
 }
 
 @media (max-width: 900px) {

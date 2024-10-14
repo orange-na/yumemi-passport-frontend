@@ -64,60 +64,62 @@ export default function PopulationChart({ prefectures }: Props) {
 
   return (
     <>
-      <div className={styles.populationLabels}>
-        {populationLabels.map((populationLabel) => (
-          <label key={populationLabel} className={styles.populationLabel}>
-            <input
-              type="radio"
-              value={populationLabel}
-              checked={selectedPopulationLabel === populationLabel}
-              onChange={() => setSelectedPopulationLabel(populationLabel)}
+      <div className={styles.lineChartContainer}>
+        <div className={styles.populationLabels}>
+          {populationLabels.map((populationLabel) => (
+            <button
+              key={populationLabel}
+              className={`${styles.populationLabel} ${
+                selectedPopulationLabel === populationLabel ? styles.active : ""
+              }`}
+              onClick={() => setSelectedPopulationLabel(populationLabel)}
+            >
+              {populationLabel}
+            </button>
+          ))}
+        </div>
+        <ResponsiveContainer width="100%" height={500}>
+          <LineChart data={data} className={styles.lineChart}>
+            <XAxis
+              dataKey="year"
+              height={50}
+              padding={{
+                left: 20,
+                right: 20,
+              }}
+              label={{
+                value: "西暦(年度)",
+                position: "insideBottomRight",
+                offset: 0,
+              }}
             />
-            {populationLabel}
-          </label>
-        ))}
+            <YAxis
+              tickFormatter={(value) => `${value / 10000}`}
+              label={{
+                value: "人口(万人)",
+                angle: -90,
+                position: "insideLeft",
+              }}
+            />
+            <Tooltip />
+            <Legend />
+            {Object.keys(data[0] || {})
+              .filter((key) => key !== "year")
+              .map((prefName, index) => {
+                const hue = (index * 137.5) % 360;
+                const color = `hsl(${hue}, 100%, 65%)`;
+                return (
+                  <Line
+                    key={prefName}
+                    type="monotone"
+                    dataKey={prefName}
+                    stroke={color}
+                  />
+                );
+              })}
+          </LineChart>
+        </ResponsiveContainer>
       </div>
-      <ResponsiveContainer width="100%" height={500}>
-        <LineChart data={data} className={styles.lineChart}>
-          <XAxis
-            dataKey="year"
-            height={50}
-            padding={{
-              left: 20,
-              right: 20,
-            }}
-            label={{
-              value: "西暦(年度)",
-              position: "insideBottomRight",
-              offset: 0,
-            }}
-          />
-          <YAxis
-            tickFormatter={(value) => `${value / 10000}`}
-            label={{
-              value: "人口(万人)",
-              angle: -90,
-              position: "insideLeft",
-            }}
-          />
-          <Tooltip />
-          <Legend />
-          {Object.keys(data[0] || {})
-            .filter((key) => key !== "year")
-            .map((prefName, index) => {
-              const hue = (index * 137.5) % 360;
-              const color = `hsl(${hue}, 100%, 65%)`;
-              return (
-                <Line
-                  key={prefName}
-                  type="monotone"
-                  dataKey={prefName}
-                  stroke={color}
-                />
-              );
-            })}
-        </LineChart>
-      </ResponsiveContainer>
     </>
   );
 }

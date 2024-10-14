@@ -1,10 +1,43 @@
-.lineChart {
-  background-color: #00000080;
-  border-radius: 8px;
+.lineChartContainer {
+  width: 100%;
+  border: 1px solid #e8decf;
+  border-top: none;
+  border-radius: 20px;
+}
+
+.populationLabels {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 20px;
 }
 
 .populationLabel {
-  font-size: 14px;
-  margin-left: 4px;
+  text-align: center;
+  padding: 10px 30px;
+  flex: 1;
   cursor: pointer;
+  border-radius: 10px 10px 0 0;
+  background-color: #f5f0e5;
+  border: 1px solid #e8decf;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.populationLabel.active {
+  background-color: #e8decf;
+}
+
+.lineChart {
+  border-radius: 0 0 20px 20px;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .populationLabel {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 10px 10px;
+  }
 }

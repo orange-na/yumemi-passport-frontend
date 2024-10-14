@@ -7,3 +7,9 @@
   max-width: 900px;
   margin: 50px auto;
 }
+
+@media screen and (max-width: 900px) {
+  .container {
+    margin: 20px;
+  }
+}

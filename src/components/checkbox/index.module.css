@@ -1,21 +1,22 @@
 .checkboxItem {
   display: flex;
   align-items: center;
+  padding: 5px 10px;
 }
 
 .checkbox {
   width: 16px;
   height: 16px;
   border-radius: 3px;
-  border: 1px solid #ffffff;
   background: none;
   appearance: none;
   cursor: pointer;
+  border: 1px solid #000;
 }
 
 .checkbox:checked {
-  background-color: #ffffff;
   position: relative;
+  border: none;
 }
 
 .checkbox:checked::after {
@@ -36,4 +37,9 @@
   line-height: 100%;
   margin-left: 4px;
   cursor: pointer;
+}
+
+.checkboxItem:has(.checkbox:checked) {
+  background-color: #f5f0e5;
+  border-radius: 50px;
 }
