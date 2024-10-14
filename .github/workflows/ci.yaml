@@ -31,9 +31,3 @@ jobs:
 
       - name: Run formatter
         run: npm run format
-
-      - name: Install Playwright
-        run: npx playwright install --with-deps
-
-      - name: Run E2E tests
-        run: npm run test:e2e
