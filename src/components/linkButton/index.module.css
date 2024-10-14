@@ -1,0 +1,27 @@
+.button_base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  height: 48px;
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.primary {
+  background: #5167e4;
+  color: #fff;
+}
+
+.secondary {
+  background: white;
+  color: #0a0a0a;
+}
