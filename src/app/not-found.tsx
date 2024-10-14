@@ -9,7 +9,7 @@ export default function NotFound() {
         お探しのページが見つかりませんでした。URLをご確認の上、再度アクセスしてください。
       </p>
       <Link href="/" className={styles.link}>
-        戻る
+        トップページへ戻る
       </Link>
     </main>
   );
