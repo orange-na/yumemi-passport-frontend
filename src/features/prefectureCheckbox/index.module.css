@@ -1,49 +1,42 @@
 .container {
+  display: grid;
+  gap: 4px;
+}
+
+.region {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.regionTitle {
+  font-weight: 600;
+  font-size: 16px;
+  width: 120px;
+}
+
+.prefectures {
+  font-weight: 500;
+  font-size: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-left: 20px;
+  margin-left: 0;
 }
 
-.prefCode {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
+@media (max-width: 900px) {
+  .region {
+    grid-template-columns: 1fr;
+  }
 
-.checkbox {
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  border: 1px solid #ffffff;
-  background: none;
-  text-align: center;
-  vertical-align: middle;
-  appearance: none;
-  cursor: pointer;
-  font-size: 1em;
-}
+  .regionTitle {
+    margin-bottom: 10px;
+  }
 
-.checkbox:checked {
-  background-color: #ffffff;
-  position: relative;
-}
-
-.checkbox:checked::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 2px;
-  left: 5px;
-  width: 4.3px;
-  height: 8.3px;
-  border: solid #000;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.checkbox_label {
-  font-size: 14px;
-  line-height: 100%;
-  margin-left: 4px;
-  cursor: pointer;
+  .prefectures {
+    margin-left: 0;
+    gap: 10px;
+  }
 }

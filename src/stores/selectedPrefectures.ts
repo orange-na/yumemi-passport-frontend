@@ -5,9 +5,11 @@ type SelectedPrefecturesStore = {
   togglePrefecture: (prefCode: number) => void;
 };
 
+const defaultPrefCode = 33; // 岡山県
+
 export const useSelectedPrefecturesStore = create<SelectedPrefecturesStore>(
   (set) => ({
-    selectedPrefectures: [],
+    selectedPrefectures: [defaultPrefCode],
     togglePrefecture: (prefCode: number) =>
       set((state) => {
         const index = state.selectedPrefectures.indexOf(prefCode);
