@@ -68,6 +68,7 @@ export default function PopulationChart({ prefectures }: Props) {
         <div className={styles.populationLabels}>
           {populationLabels.map((populationLabel) => (
             <button
+              type="button"
               key={populationLabel}
               className={`${styles.populationLabel} ${
                 selectedPopulationLabel === populationLabel ? styles.active : ""
