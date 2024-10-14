@@ -38,6 +38,9 @@
       },
       "complexity": {
         "noForEach": "off"
+      },
+      "suspicious": {
+        "noShadowRestrictedNames": "off"
       }
     }
   },
