@@ -1,5 +1,5 @@
 import styles from "./not-found.module.css";
-import LinkButton from "@/components/linkButton";
+import LinkButton from "@/components/elements/linkButton";
 
 export default function NotFound() {
   return (

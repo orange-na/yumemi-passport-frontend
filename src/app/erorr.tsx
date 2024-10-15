@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import styles from "./error.module.css";
-import LinkButton from "@/components/linkButton";
+import LinkButton from "@/components/elements/linkButton";
 
 export default function Error({
   error,

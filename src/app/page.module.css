@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   gap: 50px;
-  max-width: 900px;
-  margin: 50px auto;
+  max-width: 1000px;
+  margin: 20px auto;
 }
 
 @media screen and (max-width: 900px) {
