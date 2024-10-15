@@ -5,7 +5,7 @@
   justify-content: center;
   gap: 50px;
   max-width: 1000px;
-  margin: 20px auto;
+  margin: 30px auto 60px auto;
 }
 
 @media screen and (max-width: 900px) {

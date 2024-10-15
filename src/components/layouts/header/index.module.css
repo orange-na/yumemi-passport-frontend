@@ -3,14 +3,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 60px;
-  background-color: #e8decf;
-  border-bottom: 1px solid #e8decf;
-  /* box-shadow: 0 2px 4px #0000001a; */
+  background-color: #f5f0e5;
 }
 
 .title {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 900px) {
