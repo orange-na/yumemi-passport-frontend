@@ -3,7 +3,7 @@
 import { Prefecture } from "@/types";
 import styles from "./index.module.css";
 import { useSelectedPrefecturesStore } from "@/stores/selectedPrefectures";
-import Checkbox from "@/components/checkbox";
+import Checkbox from "@/components/elements/checkbox";
 
 type Props = {
   prefectures: Prefecture[];
