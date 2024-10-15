@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  CartesianGrid,
   Legend,
   Line,
   LineChart,
@@ -81,29 +82,27 @@ export default function PopulationChart({ prefectures }: Props) {
         </div>
         <ResponsiveContainer width="100%" height={500}>
           <LineChart data={data} className={styles.lineChart}>
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="year"
               height={50}
-              padding={{
-                left: 20,
-                right: 20,
-              }}
+              padding={{ left: 20, right: 20 }}
               label={{
-                value: "西暦(年度)",
-                position: "insideBottomRight",
+                value: "年度(年)",
+                position: "insideBottom",
                 offset: 0,
               }}
             />
             <YAxis
               tickFormatter={(value) => `${value / 10000}`}
               label={{
-                value: "人口(万人)",
+                value: "人口数(万人)",
                 angle: -90,
                 position: "insideLeft",
               }}
             />
-            <Tooltip />
-            <Legend />
+            <Tooltip contentStyle={{ backgroundColor: "#ffffffcc" }} />
+            <Legend verticalAlign="top" height={36} />
             {Object.keys(data[0] || {})
               .filter((key) => key !== "year")
               .map((prefName, index) => {
@@ -115,6 +114,9 @@ export default function PopulationChart({ prefectures }: Props) {
                     type="monotone"
                     dataKey={prefName}
                     stroke={color}
+                    strokeWidth={2}
+                    dot={{ r: 2 }}
+                    activeDot={{ r: 8 }}
                   />
                 );
               })}
