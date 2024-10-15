@@ -3,35 +3,75 @@
 import { Prefecture } from "@/types";
 import styles from "./index.module.css";
 import { useSelectedPrefecturesStore } from "@/stores/selectedPrefectures";
+import Checkbox from "@/components/elements/checkbox";
 
 type Props = {
   prefectures: Prefecture[];
 };
-
 export default function PrefectureCheckbox({ prefectures }: Props) {
   const { selectedPrefectures, togglePrefecture } =
     useSelectedPrefecturesStore();
 
+  const renderPrefectureCheckbox = (prefecture: Prefecture) => (
+    <Checkbox
+      key={prefecture.prefCode}
+      id={`prefecture-${prefecture.prefCode}`}
+      label={prefecture.prefName}
+      checked={selectedPrefectures.includes(prefecture.prefCode)}
+      onChange={() => togglePrefecture(prefecture.prefCode)}
+    />
+  );
+
   return (
     <div className={styles.container}>
-      {prefectures.map((prefecture) => (
-        <div key={prefecture.prefCode}>
-          <input
-            type="checkbox"
-            name="prefecture"
-            checked={selectedPrefectures.includes(prefecture.prefCode)}
-            id={`prefecture-${prefecture.prefCode}`}
-            className={styles.checkbox}
-            onChange={() => togglePrefecture(prefecture.prefCode)}
-          />
-          <label
-            htmlFor={`prefecture-${prefecture.prefCode}`}
-            className={styles.checkbox_label}
-          >
-            {prefecture.prefName}
-          </label>
+      <div className={styles.region}>
+        <div className={styles.regionTitle}>北海道・東北</div>
+        <div className={styles.prefectures}>
+          {prefectures.slice(0, 7).map(renderPrefectureCheckbox)}
         </div>
-      ))}
+      </div>
+
+      <div className={styles.region}>
+        <div className={styles.regionTitle}>関東</div>
+        <div className={styles.prefectures}>
+          {prefectures.slice(7, 14).map(renderPrefectureCheckbox)}
+        </div>
+      </div>
+
+      <div className={styles.region}>
+        <div className={styles.regionTitle}>北陸・甲信越</div>
+        <div className={styles.prefectures}>
+          {prefectures.slice(14, 20).map(renderPrefectureCheckbox)}
+        </div>
+      </div>
+
+      <div className={styles.region}>
+        <div className={styles.regionTitle}>東海</div>
+        <div className={styles.prefectures}>
+          {prefectures.slice(20, 24).map(renderPrefectureCheckbox)}
+        </div>
+      </div>
+
+      <div className={styles.region}>
+        <div className={styles.regionTitle}>関西</div>
+        <div className={styles.prefectures}>
+          {prefectures.slice(24, 30).map(renderPrefectureCheckbox)}
+        </div>
+      </div>
+
+      <div className={styles.region}>
+        <div className={styles.regionTitle}>中国・四国</div>
+        <div className={styles.prefectures}>
+          {prefectures.slice(30, 39).map(renderPrefectureCheckbox)}
+        </div>
+      </div>
+
+      <div className={styles.region}>
+        <div className={styles.regionTitle}>九州・沖縄</div>
+        <div className={styles.prefectures}>
+          {prefectures.slice(39).map(renderPrefectureCheckbox)}
+        </div>
+      </div>
     </div>
   );
 }
