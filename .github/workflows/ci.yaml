@@ -31,3 +31,11 @@ jobs:
 
       - name: Run formatter
         run: npm run format
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
+        env:
+          RESAS_API_KEY: ${{ secrets.RESAS_API_KEY }}
