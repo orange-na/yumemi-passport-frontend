@@ -3,6 +3,9 @@ name: e2e tests
 on:
   - pull_request
 
+env:
+  RESAS_API_KEY: ${{ secrets.RESAS_API_KEY }}
+
 jobs:
   test:
     timeout-minutes: 5
@@ -12,11 +15,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
-
-      - name: Create .env file
-        run: |
-          touch .env
-          echo "RESAS_API_KEY=${{ secrets.RESAS_API_KEY }}" >> .env
 
       - name: Install dependencies
         run: npm install
