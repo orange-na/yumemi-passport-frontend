@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("/");
   await page.waitForSelector('text="北海道"');
 });
 
@@ -31,7 +31,7 @@ test("選択した都道府県のチェックを外す", async ({ page }) => {
 });
 
 test("存在しないページへのアクセス", async ({ page }) => {
-  await page.goto("http://localhost:3000/invalid");
+  await page.goto("/invalid");
 
   await expect(page.getByText("404 Not Found")).toBeVisible();
 });
