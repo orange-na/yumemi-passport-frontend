@@ -26,7 +26,7 @@
 - Zustand
 - Jest
 - Playwright
-- ESLint
+- Biome
 - Prettier
 - Storybook
 - GitHub Actions
@@ -48,14 +48,9 @@
 │   ├── libs                 # 外部ライブラリを格納
 │   ├── stores               # 状態管理に関するファイルを格納
 │   └── types                # 型定義ファイルを格納
-├── .env                     # 環境変数を定義
-├── .eslintrc.json           # ESLintの設定ファイル
-├── README.md                # プロジェクトの説明文書
-├── jest.config.ts           # Jestの設定ファイル
-├── next.config.mjs          # Next.jsの設定ファイル
-├── package.json             # プロジェクトの依存関係とスクリプトを定義
-├── playwright.config.ts     # Playwrightの設定ファイル
-└── tsconfig.json            # TypeScriptの設定ファイル
+├── next.config.mjs        
+├── package.json        
+└── tsconfig.json       
 ```
 
 ## セットアップ
