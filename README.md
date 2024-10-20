@@ -6,6 +6,7 @@
 ![Recharts](https://img.shields.io/badge/-Recharts-22ADF6?style=flat-square&logo=recharts&logoColor=white)
 ![Jest](https://img.shields.io/badge/-Jest-C21325?style=flat-square&logo=jest&logoColor=white)
 ![Playwright](https://img.shields.io/badge/-Playwright-2EAD33?style=flat-square&logo=playwright&logoColor=white)
+![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=flat-square&logo=storybook&logoColor=white)
 
 デプロイ先 URL: [https://yumemi-passport-frontend-murex.vercel.app/](https://yumemi-passport-frontend-murex.vercel.app/)
 
@@ -27,6 +28,7 @@
 - Playwright
 - ESLint
 - Prettier
+- Storybook
 - GitHub Actions
 
 ## プロジェクト構成
@@ -97,6 +99,14 @@ $ npm run test
 
 ```bash
 $ npm run test:e2e
+```
+
+## Storybook
+
+コンポーネントのカタログとして Storybook を使用しています。
+
+```bash
+$ npm run storybook
 ```
 
 ## デプロイ
