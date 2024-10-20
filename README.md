@@ -7,15 +7,12 @@
 ![Jest](https://img.shields.io/badge/-Jest-C21325?style=flat-square&logo=jest&logoColor=white)
 ![Playwright](https://img.shields.io/badge/-Playwright-2EAD33?style=flat-square&logo=playwright&logoColor=white)
 
-このリポジトリは、ゆめみパスポートのフロントエンドコーディング試験の解答例です。試験では、RESAS API を使用して都道府県別の人口推移グラフを表示する Web アプリケーションを開発しました。
-
 デプロイ先 URL: [https://yumemi-passport-frontend-murex.vercel.app/](https://yumemi-passport-frontend-murex.vercel.app/)
 
 ## 機能
 
 - 都道府県のチェックボックスを選択すると、選択された都道府県の人口推移グラフが表示されます。
 - グラフには、総人口、年少人口、生産年齢人口、老年人口の 4 つの区分が表示されます。
-- グラフの表示期間は 1960 年から 2045 年までです。
 - レスポンシブデザインに対応しており、モバイル端末でも快適に閲覧できます。
 
 ## 使用技術
