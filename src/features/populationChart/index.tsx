@@ -101,8 +101,20 @@ export default function PopulationChart({ prefectures }: Props) {
                 position: "insideLeft",
               }}
             />
-            <Tooltip contentStyle={{ backgroundColor: "#ffffffcc" }} />
-            <Legend verticalAlign="bottom" height={36} />
+            <Tooltip
+              contentStyle={{ backgroundColor: "#ffffffcc" }}
+              wrapperStyle={{
+                maxHeight: 200,
+                overflowY: "auto",
+              }}
+            />
+            <Legend
+              verticalAlign="bottom"
+              height={60}
+              wrapperStyle={{
+                overflowY: "auto",
+              }}
+            />
             {Object.keys(data[0] || {})
               .filter((key) => key !== "year")
               .map((prefName, index) => {
