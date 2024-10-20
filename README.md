@@ -27,7 +27,6 @@
 - Jest
 - Playwright
 - Biome
-- Prettier
 - Storybook
 - GitHub Actions
 
