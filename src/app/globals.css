@@ -92,6 +92,19 @@ meter {
   display: none;
 }
 
+:root {
+  /* Colors */
+  --primary-color: #f5f0e5;
+  --secondary-color: #e8decf;
+  --background-color: #ffffff;
+  --text-color: #1c170d;
+
+  /* Font sizes */
+  --font-size-small: 14px;
+  --font-size-base: 16px;
+  --font-size-large: 20px;
+}
+
 html,
 body {
   position: relative;
@@ -100,6 +113,6 @@ body {
   text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
-  background-color: #ffffff;
-  color: #1c170d;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }

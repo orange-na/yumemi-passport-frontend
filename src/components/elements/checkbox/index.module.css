@@ -11,7 +11,7 @@
   background: none;
   appearance: none;
   cursor: pointer;
-  border: 1px solid #000;
+  border: 1px solid var(--text-color);
 }
 
 .checkbox:checked {
@@ -27,19 +27,19 @@
   left: 5px;
   width: 4.3px;
   height: 8.3px;
-  border: solid #000;
+  border: solid var(--text-color);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
 
 .checkboxLabel {
-  font-size: 14px;
+  font-size: var(--font-size-small);
   line-height: 100%;
   margin-left: 4px;
   cursor: pointer;
 }
 
 .checkboxItem:has(.checkbox:checked) {
-  background-color: #f5f0e5;
+  background-color: var(--primary-color);
   border-radius: 50px;
 }

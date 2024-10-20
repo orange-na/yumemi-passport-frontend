@@ -10,8 +10,8 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Yumemi Passport Frontend",
-  description: "Yumemi Passport Frontend",
+  title: "都道府県別人口推移グラフ",
+  description: "都道府県別人口推移グラフ",
 };
 
 export default function RootLayout({
