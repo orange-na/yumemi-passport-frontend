@@ -11,9 +11,9 @@ export default async function Home() {
   }
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <PrefectureCheckbox prefectures={prefectures} />
       <PopulationChart prefectures={prefectures} />
-    </div>
+    </main>
   );
 }

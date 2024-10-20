@@ -25,49 +25,49 @@ export default function PrefectureCheckbox({ prefectures }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.region}>
-        <div className={styles.regionTitle}>北海道・東北</div>
+        <h2 className={styles.regionTitle}>北海道・東北</h2>
         <div className={styles.prefectures}>
           {prefectures.slice(0, 7).map(renderPrefectureCheckbox)}
         </div>
       </div>
 
       <div className={styles.region}>
-        <div className={styles.regionTitle}>関東</div>
+        <h2 className={styles.regionTitle}>関東</h2>
         <div className={styles.prefectures}>
           {prefectures.slice(7, 14).map(renderPrefectureCheckbox)}
         </div>
       </div>
 
       <div className={styles.region}>
-        <div className={styles.regionTitle}>北陸・甲信越</div>
+        <h2 className={styles.regionTitle}>北陸・甲信越</h2>
         <div className={styles.prefectures}>
           {prefectures.slice(14, 20).map(renderPrefectureCheckbox)}
         </div>
       </div>
 
       <div className={styles.region}>
-        <div className={styles.regionTitle}>東海</div>
+        <h2 className={styles.regionTitle}>東海</h2>
         <div className={styles.prefectures}>
           {prefectures.slice(20, 24).map(renderPrefectureCheckbox)}
         </div>
       </div>
 
       <div className={styles.region}>
-        <div className={styles.regionTitle}>関西</div>
+        <h2 className={styles.regionTitle}>関西</h2>
         <div className={styles.prefectures}>
           {prefectures.slice(24, 30).map(renderPrefectureCheckbox)}
         </div>
       </div>
 
       <div className={styles.region}>
-        <div className={styles.regionTitle}>中国・四国</div>
+        <h2 className={styles.regionTitle}>中国・四国</h2>
         <div className={styles.prefectures}>
           {prefectures.slice(30, 39).map(renderPrefectureCheckbox)}
         </div>
       </div>
 
       <div className={styles.region}>
-        <div className={styles.regionTitle}>九州・沖縄</div>
+        <h2 className={styles.regionTitle}>九州・沖縄</h2>
         <div className={styles.prefectures}>
           {prefectures.slice(39).map(renderPrefectureCheckbox)}
         </div>
