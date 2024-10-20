@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { PopulationLabel, Prefecture } from "@/types";
+import { PopulationLabel, PopulationResponse, Prefecture } from "@/types";
 import { useEffect, useState } from "react";
 import { useSelectedPrefecturesStore } from "@/stores/selectedPrefectures";
 import { populationLabels } from "@/constants";
@@ -20,14 +20,14 @@ type Props = {
   prefectures: Prefecture[];
 };
 
-type PopulationData = {
+type PopulationChartData = {
   year: number;
   [key: string]: number;
 };
 
 export default function PopulationChart({ prefectures }: Props) {
   const { selectedPrefectures } = useSelectedPrefecturesStore();
-  const [data, setData] = useState<PopulationData[]>([]);
+  const [data, setData] = useState<PopulationChartData[]>([]);
   const [selectedPopulationLabel, setSelectedPopulationLabel] =
     useState<PopulationLabel>("総人口");
 
@@ -37,7 +37,7 @@ export default function PopulationChart({ prefectures }: Props) {
         fetchPopulation(prefCode)
       );
       const populationDataArray = await Promise.all(promises);
-      const newData: PopulationData[] = [];
+      const newData: PopulationChartData[] = [];
 
       populationDataArray.forEach((prefectureData, index) => {
         const prefCode = selectedPrefectures[index];
@@ -47,7 +47,7 @@ export default function PopulationChart({ prefectures }: Props) {
 
         prefectureData
           .find(({ label }) => label === selectedPopulationLabel)
-          ?.data.forEach((item: { year: number; value: number }) => {
+          ?.data.forEach((item) => {
             const existingItem = newData.find((d) => d.year === item.year);
             if (existingItem) {
               existingItem[prefName!] = item.value;
@@ -127,9 +127,7 @@ export default function PopulationChart({ prefectures }: Props) {
   );
 }
 
-async function fetchPopulation(
-  prefCode: number
-): Promise<{ label: string; data: { year: number; value: number }[] }[]> {
+async function fetchPopulation(prefCode: number): Promise<PopulationResponse> {
   try {
     const res = await fetch(`/api/prefectures/${prefCode}/population`);
     const data = await res.json();
