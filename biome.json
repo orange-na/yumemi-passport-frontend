@@ -41,6 +41,9 @@
       },
       "suspicious": {
         "noShadowRestrictedNames": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
       }
     }
   },
