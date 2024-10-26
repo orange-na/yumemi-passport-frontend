@@ -17,6 +17,7 @@ export const usePopulationData = (
 
   useEffect(() => {
     const fetchPopulationData = async () => {
+      // まだデータがフェッチされていない選択された都道府県を取得
       const newSelectedPrefectures = selectedPrefectures.filter(
         (prefCode) =>
           !populationData.some(
@@ -24,6 +25,7 @@ export const usePopulationData = (
           )
       );
 
+      // 新しく選択された都道府県の人口データを並行してフェッチ
       const promises = newSelectedPrefectures.map((prefCode) =>
         fetchPopulation(prefCode)
       );
@@ -31,6 +33,7 @@ export const usePopulationData = (
 
       const newData: PopulationChartData[] = [...populationData];
 
+      // フェッチしたデータを既存のデータにマージ
       populationDataArray.forEach((prefectureData, index) => {
         const prefCode = newSelectedPrefectures[index];
         const prefName = getPrefName(prefCode);
@@ -47,6 +50,7 @@ export const usePopulationData = (
           });
       });
 
+      // 選択された都道府県のデータのみを含む新しい配列を作成
       const updatedData = newData.map((item) => {
         const filteredItem: PopulationChartData = { year: item.year };
         selectedPrefectures.forEach((prefCode) => {
@@ -63,6 +67,7 @@ export const usePopulationData = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPrefectures, prefectures, selectedPopulationLabel]);
 
+  // 都道府県コードから都道府県名を取得するヘルパー関数
   const getPrefName = (prefCode: number) => {
     return prefectures.find((p) => p.prefCode === prefCode)?.prefName || "";
   };
