@@ -10,58 +10,27 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { PopulationLabel, PopulationResponse, Prefecture } from "@/types";
-import { useEffect, useState } from "react";
+import { PopulationLabel, Prefecture } from "@/types";
+import { useState } from "react";
 import { useSelectedPrefecturesStore } from "@/stores/selectedPrefectures";
 import { populationLabels } from "@/constants";
 import styles from "./index.module.css";
+import { usePopulationData } from "@/hooks/usePopulationData";
 
 type Props = {
   prefectures: Prefecture[];
 };
 
-type PopulationChartData = {
-  year: number;
-  [key: string]: number;
-};
-
 export default function PopulationChart({ prefectures }: Props) {
   const { selectedPrefectures } = useSelectedPrefecturesStore();
-  const [data, setData] = useState<PopulationChartData[]>([]);
   const [selectedPopulationLabel, setSelectedPopulationLabel] =
     useState<PopulationLabel>("総人口");
 
-  useEffect(() => {
-    const fetchPopulationData = async () => {
-      const promises = selectedPrefectures.map((prefCode) =>
-        fetchPopulation(prefCode)
-      );
-      const populationDataArray = await Promise.all(promises);
-      const newData: PopulationChartData[] = [];
-
-      populationDataArray.forEach((prefectureData, index) => {
-        const prefCode = selectedPrefectures[index];
-        const prefName = prefectures.find(
-          (p) => p.prefCode === prefCode
-        )?.prefName;
-
-        prefectureData
-          .find(({ label }) => label === selectedPopulationLabel)
-          ?.data.forEach((item) => {
-            const existingItem = newData.find((d) => d.year === item.year);
-            if (existingItem) {
-              existingItem[prefName!] = item.value;
-            } else {
-              newData.push({ year: item.year, [prefName!]: item.value });
-            }
-          });
-      });
-
-      setData(newData);
-    };
-
-    fetchPopulationData();
-  }, [selectedPrefectures, prefectures, selectedPopulationLabel]);
+  const { populationData } = usePopulationData(
+    selectedPrefectures,
+    prefectures,
+    selectedPopulationLabel
+  );
 
   return (
     <>
@@ -81,7 +50,7 @@ export default function PopulationChart({ prefectures }: Props) {
           ))}
         </div>
         <ResponsiveContainer width="100%" height={500}>
-          <LineChart data={data} className={styles.lineChart}>
+          <LineChart data={populationData} className={styles.lineChart}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="year"
@@ -115,7 +84,7 @@ export default function PopulationChart({ prefectures }: Props) {
                 overflowY: "auto",
               }}
             />
-            {Object.keys(data[0] || {})
+            {Object.keys(populationData[0] || {})
               .filter((key) => key !== "year")
               .map((prefName, index) => {
                 const hue = (index * 137.5) % 360;
@@ -137,15 +106,4 @@ export default function PopulationChart({ prefectures }: Props) {
       </div>
     </>
   );
-}
-
-async function fetchPopulation(prefCode: number): Promise<PopulationResponse> {
-  try {
-    const res = await fetch(`/api/prefectures/${prefCode}/population`);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to fetch population data");
-  }
 }
